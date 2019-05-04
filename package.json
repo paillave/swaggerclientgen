@@ -1,0 +1,31 @@
+{
+  "name": "swaggerclientgen",
+  "version": "1.0.0",
+  "description": "Generate files based on swagger metadata url",
+  "main": "out/index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsc"
+  },
+  "keywords": [
+    "swagger",
+    "code",
+    "generation"
+  ],
+  "author": "Stéphane Royer",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^11.13.8",
+    "@types/node-fetch": "^2.3.3",
+    "@types/nunjucks": "^3.1.1",
+    "@types/yargs": "^13.0.0",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5",
+    "rimraf": "^2.6.3"
+  },
+  "dependencies": {
+    "node-fetch": "^2.5.0",
+    "nunjucks": "^3.2.0",
+    "yargs": "^13.2.2"
+  }
+}
