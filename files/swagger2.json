@@ -1,0 +1,917 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "v1",
+        "title": "FundProcessPms"
+    },
+    "paths": {
+        "/api/Entities/{id}": {
+            "get": {
+                "tags": [
+                    "Entities"
+                ],
+                "operationId": "GetAsync",
+                "consumes": [],
+                "produces": [
+                    "text/plain",
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ModelWithReferences[EntityModel]"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Entities"
+                ],
+                "operationId": "DeleteAsync",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/Entities": {
+            "get": {
+                "tags": [
+                    "Entities"
+                ],
+                "operationId": "GetAllAsync",
+                "consumes": [],
+                "produces": [
+                    "text/plain",
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ModelWithReferences[List[EntityModel]]"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Entities"
+                ],
+                "operationId": "SaveAsync",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "text/plain",
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "entityModel",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/EntityModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ModelWithReferences[EntityModel]"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/ProfileAccount/Current": {
+            "get": {
+                "tags": [
+                    "ProfileAccount"
+                ],
+                "operationId": "Current",
+                "consumes": [],
+                "produces": [
+                    "text/plain",
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ProfileModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/SampleData/WeatherForecasts": {
+            "get": {
+                "tags": [
+                    "SampleData"
+                ],
+                "operationId": "WeatherForecasts",
+                "consumes": [],
+                "produces": [
+                    "text/plain",
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "startDateIndex",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "uniqueItems": false,
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/WeatherForecast"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/Securities/{id}": {
+            "get": {
+                "tags": [
+                    "Securities"
+                ],
+                "operationId": "GetAsync",
+                "consumes": [],
+                "produces": [
+                    "text/plain",
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ModelWithReferences[SecurityModel]"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Securities"
+                ],
+                "operationId": "DeleteAsync",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/Securities": {
+            "get": {
+                "tags": [
+                    "Securities"
+                ],
+                "operationId": "GetAllAsync",
+                "consumes": [],
+                "produces": [
+                    "text/plain",
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ModelWithReferences[List[SecurityModel]]"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Securities"
+                ],
+                "operationId": "SaveAsync",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "text/plain",
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "entityModel",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/SecurityModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ModelWithReferences[SecurityModel]"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ModelWithReferences[EntityModel]": {
+            "type": "object",
+            "properties": {
+                "model": {
+                    "$ref": "#/definitions/EntityModel"
+                },
+                "references": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "EntityModel": {
+            "type": "object",
+            "properties": {
+                "entityType": {
+                    "format": "int32",
+                    "enum": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "type": "integer"
+                },
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "countryCode": {
+                    "type": "string"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "isActive": {
+                    "type": "boolean"
+                },
+                "entityGroupId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "contactId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "vat": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "registrationNumber": {
+                    "type": "string"
+                },
+                "people": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "regulated": {
+                    "type": "boolean"
+                },
+                "cssfEquivalentSupervision": {
+                    "type": "boolean"
+                },
+                "financialInstitutionType": {
+                    "format": "int32",
+                    "enum": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8
+                    ],
+                    "type": "integer"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "mobileNumber": {
+                    "type": "string"
+                },
+                "idCardNumber": {
+                    "type": "string"
+                },
+                "passportNumber": {
+                    "type": "string"
+                },
+                "companies": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "collectiveManagement": {
+                    "type": "boolean"
+                },
+                "discretionaryManagement": {
+                    "type": "boolean"
+                },
+                "aifm": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "ModelWithReferences[List[EntityModel]]": {
+            "type": "object",
+            "properties": {
+                "model": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EntityModel"
+                    }
+                },
+                "references": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "ProfileModel": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "culture": {
+                    "type": "string"
+                },
+                "isActive": {
+                    "type": "boolean"
+                },
+                "entities": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ProfileEntityModel"
+                    }
+                }
+            }
+        },
+        "ProfileEntityModel": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "groupId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "groupName": {
+                    "type": "string"
+                },
+                "roles": {
+                    "$ref": "#/definitions/RolesModel"
+                }
+            }
+        },
+        "RolesModel": {
+            "type": "object",
+            "properties": {
+                "administrator": {
+                    "type": "boolean"
+                },
+                "powerUser": {
+                    "type": "boolean"
+                },
+                "advisor": {
+                    "type": "boolean"
+                },
+                "client": {
+                    "type": "boolean"
+                },
+                "banker": {
+                    "type": "boolean"
+                },
+                "awaitingUser": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "WeatherForecast": {
+            "type": "object",
+            "properties": {
+                "dateFormatted": {
+                    "type": "string"
+                },
+                "temperatureC": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "summary": {
+                    "type": "string"
+                },
+                "myProperty": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "temperatureF": {
+                    "format": "int32",
+                    "type": "integer",
+                    "readOnly": true
+                }
+            }
+        },
+        "ModelWithReferences[SecurityModel]": {
+            "type": "object",
+            "properties": {
+                "model": {
+                    "$ref": "#/definitions/SecurityModel"
+                },
+                "references": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "SecurityModel": {
+            "type": "object",
+            "properties": {
+                "securityType": {
+                    "format": "int32",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19
+                    ],
+                    "type": "integer"
+                },
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "internalCode": {
+                    "type": "string"
+                },
+                "isin": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "benchmarkId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "currencyIso": {
+                    "type": "string"
+                },
+                "countryCode": {
+                    "type": "string"
+                },
+                "pricingFrequency": {
+                    "format": "int32",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8
+                    ],
+                    "type": "integer"
+                },
+                "classificationStrategy": {
+                    "type": "string"
+                },
+                "marketPlaceId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "creationDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "lastModifiedDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "couponType": {
+                    "type": "string"
+                },
+                "couponRate": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "faceValue": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "notional": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "maturityDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "isPerpetual": {
+                    "type": "boolean"
+                },
+                "firstPaymentDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "nextCouponDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "paymentFrequency": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "issueAmount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "isOtc": {
+                    "type": "boolean"
+                },
+                "counterpartyId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "underlyingIsin": {
+                    "type": "string"
+                },
+                "contractSize": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "strikePrice": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "currencyToIso": {
+                    "type": "string"
+                },
+                "optionType": {
+                    "format": "int32",
+                    "enum": [
+                        0,
+                        1
+                    ],
+                    "type": "integer"
+                },
+                "fundAdminId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "custodianId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "navFrequency": {
+                    "format": "int32",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8
+                    ],
+                    "type": "integer"
+                },
+                "isManaged": {
+                    "type": "boolean"
+                },
+                "sicavId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "transferAgentId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "domicileIso": {
+                    "type": "string"
+                },
+                "subscriptionContactId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "recommendedTimeHorizon": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "settlementNbDays": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "isLiquidated": {
+                    "type": "boolean"
+                },
+                "liquidationDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "investmentProcess": {
+                    "format": "int32",
+                    "enum": [
+                        1,
+                        2,
+                        3
+                    ],
+                    "type": "integer"
+                },
+                "shortExposure": {
+                    "type": "boolean"
+                },
+                "leverage": {
+                    "type": "boolean"
+                },
+                "closedEnded": {
+                    "type": "boolean"
+                },
+                "subFundId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "isPrimary": {
+                    "type": "boolean"
+                },
+                "distributionType": {
+                    "format": "int32",
+                    "enum": [
+                        0,
+                        1
+                    ],
+                    "type": "integer"
+                },
+                "investorType": {
+                    "format": "int32",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "type": "integer"
+                },
+                "inceptionDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "closingDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "minimumInvestment": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "entryFee": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "exitFee": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "managementFee": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "performanceFee": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "dividendPeriodicity": {
+                    "format": "int32",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8
+                    ],
+                    "type": "integer"
+                },
+                "isOpenForInvestment": {
+                    "type": "boolean"
+                },
+                "gicsSectorId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "icbSectorId": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "ModelWithReferences[List[SecurityModel]]": {
+            "type": "object",
+            "properties": {
+                "model": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SecurityModel"
+                    }
+                },
+                "references": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

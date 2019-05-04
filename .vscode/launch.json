@@ -11,12 +11,17 @@
             "program": "${workspaceFolder}/src/index.ts",
             "preLaunchTask": "tsc: build - tsconfig.json",
             "args": [
-                "--source","https://petstore.swagger.io/v2/swagger.json",
-                "--targetFile","files/models.ts",
-                "--templateFile","files/entities.tpl"
+                "--config",
+                "files/swaggerclientgen.json"
+                // // "--source","files/swagger2.json",
+                // "--source","https://localhost:60451/swagger/v1/swagger.json",
+                // // "--templateFile","files/propertiesDictionary.tpl",
+                // // "--targetFile","files/propertiesDictionary.ts"
+                // "--templateFile","files/entities.tpl",
+                // "--targetFile","files/models.ts"
             ],
             "outFiles": [
-                "${workspaceFolder}/out/**/*.js"
+                "${workspaceFolder}/dist/**/*.js"
             ],
             "cwd": "${workspaceFolder}"
         }

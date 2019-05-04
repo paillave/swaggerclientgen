@@ -1,0 +1,7 @@
+{
+    "inputUri": "https://localhost:60451/swagger/v1/swagger.json",
+    "transformations": {
+        "files/propertiesDictionary.tpl": "files/output/propertiesDictionary.ts",
+        "files/models.tpl": "files/output/models.ts"
+    }
+}

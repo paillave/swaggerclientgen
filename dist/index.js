@@ -12,8 +12,9 @@ const node_fetch_1 = require("node-fetch");
 const yargs_1 = require("yargs");
 const nunjucks = require("nunjucks");
 const fs = require("fs");
+const https_1 = require("https");
 console.info("Generation...");
-execute()
+execute(getConfig())
     .then(executionSuccessful)
     .catch(executionFailed);
 function executionSuccessful() {
@@ -22,13 +23,45 @@ function executionSuccessful() {
 function executionFailed(reason) {
     console.info(reason);
 }
-function execute() {
+function getConfig() {
+    if (yargs_1.argv.config) {
+        return JSON.parse(fs.readFileSync(yargs_1.argv.config).toString());
+    }
+    else {
+        return {
+            inputUri: yargs_1.argv.source,
+            transformations: {
+                [yargs_1.argv.templateFile]: yargs_1.argv.targetFile
+            }
+        };
+    }
+}
+function readFileContent(uri) {
     return __awaiter(this, void 0, void 0, function* () {
-        const swaggerContent = yield (yield node_fetch_1.default(yargs_1.argv.source)).json();
-        nunjucks.configure({ autoescape: true, trimBlocks: true });
-        if (yargs_1.argv.templateFile && yargs_1.argv.targetFile) {
-            const apisContent = nunjucks.render(yargs_1.argv.templateFile, swaggerContent);
-            fs.writeFileSync(yargs_1.argv.targetFile, apisContent);
+        if (uri.startsWith("http")) {
+            return (yield node_fetch_1.default(uri, { agent: new https_1.Agent({ rejectUnauthorized: false }) })).json();
+        }
+        else {
+            return new Promise(function (fulfill, reject) {
+                fs.readFile(uri, function (err, res) {
+                    if (err) {
+                        reject(err);
+                    }
+                    else {
+                        fulfill(JSON.parse(res.toString()));
+                    }
+                });
+            });
+        }
+    });
+}
+function execute(config) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const swaggerContent = yield (readFileContent(config.inputUri));
+        nunjucks.configure({ autoescape: false, trimBlocks: true });
+        for (let templateFile in config.transformations) {
+            const apisContent = nunjucks.render(templateFile, swaggerContent);
+            fs.writeFileSync(config.transformations[templateFile], apisContent);
         }
     });
 }
