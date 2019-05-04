@@ -1,0 +1,12 @@
+export const RestApisDictionary = {
+{% for tag, elts in paths|toarray("path","definition")|selectmany("pathDefinition", "definition","method","definition")|groupby2("definition.tags.0") %}
+    {{tag}}: {
+{% for elt in elts %}
+        {{elt.definition.operationId|replace("Async","")}}: {
+            path: "{{elt.pathDefinition.path}}",
+            method: "{{elt.method|upper}}"
+        },
+{% endfor %}
+    },
+{% endfor %}
+};

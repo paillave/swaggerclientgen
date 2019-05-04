@@ -58,11 +58,61 @@ function readFileContent(uri) {
 function execute(config) {
     return __awaiter(this, void 0, void 0, function* () {
         const swaggerContent = yield (readFileContent(config.inputUri));
-        nunjucks.configure({ autoescape: false, trimBlocks: true });
+        const env = nunjucks.configure({ autoescape: false, trimBlocks: true });
+        env.addFilter("toarray", toArray);
+        env.addFilter("selectmany", selectMany);
+        env.addFilter("groupby2", groupBy);
         for (let templateFile in config.transformations) {
             const apisContent = nunjucks.render(templateFile, swaggerContent);
             fs.writeFileSync(config.transformations[templateFile], apisContent);
         }
     });
+}
+function groupBy(node, pathToKey) {
+    const outputValue = {};
+    for (const keyTarget in node) {
+        const key = getSubValue(node[keyTarget], pathToKey);
+        if (!outputValue[key]) {
+            outputValue[key] = [];
+        }
+        outputValue[key].push(node[keyTarget]);
+    }
+    return outputValue;
+}
+function selectMany(node, parentTargetName, subItemToSelect, keyTargetName, valueTargetName) {
+    const outputList = [];
+    for (const idx in node) {
+        const element = node[idx];
+        for (const keyTarget in element[subItemToSelect]) {
+            const value = getSubValue(element[subItemToSelect], keyTarget);
+            outputList.push({
+                [parentTargetName]: element,
+                [valueTargetName]: value,
+                [keyTargetName]: keyTarget
+            });
+        }
+    }
+    return outputList;
+}
+function getSubValue(value, path) {
+    const pos = path.indexOf(".");
+    if (pos >= 0) {
+        const left = path.substr(0, pos);
+        const right = path.substring(pos + 1);
+        return getSubValue(value[left], right);
+    }
+    else {
+        return value[path];
+    }
+}
+function toArray(node, keyTargetName, valueTargetName) {
+    const outputList = [];
+    for (const keyTarget in node) {
+        outputList.push({
+            [keyTargetName]: keyTarget,
+            [valueTargetName]: node[keyTarget]
+        });
+    }
+    return outputList;
 }
 //# sourceMappingURL=index.js.map

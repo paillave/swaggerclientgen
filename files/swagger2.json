@@ -20,16 +20,10 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "id",
                         "in": "path",
                         "required": true,
-                        "type": "string"
+                        "type": "integer",
+                        "format": "int32"
                     }
                 ],
                 "responses": {
@@ -54,16 +48,10 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "id",
                         "in": "path",
                         "required": true,
-                        "type": "string"
+                        "type": "integer",
+                        "format": "int32"
                     }
                 ],
                 "responses": {
@@ -204,16 +192,10 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "id",
                         "in": "path",
                         "required": true,
-                        "type": "string"
+                        "type": "integer",
+                        "format": "int32"
                     }
                 ],
                 "responses": {
@@ -238,16 +220,10 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "id",
                         "in": "path",
                         "required": true,
-                        "type": "string"
+                        "type": "integer",
+                        "format": "int32"
                     }
                 ],
                 "responses": {
