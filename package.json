@@ -1,19 +1,32 @@
 {
-  "name": "swaggerclientgen",
-  "version": "1.0.0",
-  "description": "Generate files based on swagger metadata url",
-  "main": "dist/index.js",
+  "name": "json-template-text",
+  "version": "1.0.1",
+  "description": "Generate files from json files using templates",
+  "main": "bin/index.js",
+  "preferGlobal": true,
+  "bin": {
+    "json-template-text": "bin/index.js"
+  },
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf bin",
     "build": "tsc"
   },
   "keywords": [
     "swagger",
     "code",
-    "generation"
+    "generation",
+    "json",
+    "template"
   ],
   "author": "Stéphane Royer",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paillave/swaggerclientgen.git"
+  },
+  "files": [
+    "bin/index.js"
+  ],
   "devDependencies": {
     "@types/node": "^11.13.8",
     "@types/node-fetch": "^2.3.3",

@@ -21,7 +21,7 @@
                 // "--targetFile","files/models.ts"
             ],
             "outFiles": [
-                "${workspaceFolder}/dist/**/*.js"
+                "${workspaceFolder}/bin/**/*.js"
             ],
             "cwd": "${workspaceFolder}"
         }
