@@ -16,6 +16,7 @@ const fs = require("fs");
 const https_1 = require("https");
 program
     .usage("[options]")
+    .version("1.0.4")
     .description("Generate any text file from a web or local json file using a template.")
     .option("-c, --config <file>", "configuration file path")
     .option("-t, --template <file>", "template file path")
