@@ -23,7 +23,7 @@ interface IArgs {
 
 program
     .usage("[options]")
-    .version("1.0.5")
+    .version("1.0.6")
     .description("Generate any text file from a web or local json file using a template.")
     .option("-c, --config <file>", "configuration file path")
     .option("-t, --template <file>", "template file path")
@@ -91,6 +91,8 @@ async function execute(config: IConfig) {
     env.addFilter("selectmany", selectMany);
     env.addFilter("groupby2", groupBy);
     env.addFilter("regexreplace", regexReplace);
+    env.addFilter("include", include);
+    env.addFilter("exclude", exclude);
     for (let templateFile in config.transformations) {
         const apisContent = nunjucks.render(templateFile as string, swaggerContent);
         fs.writeFileSync(config.transformations[templateFile], apisContent);
@@ -135,6 +137,28 @@ function getSubValue(value: any, path: string): any {
     else {
         return value[path];
     }
+}
+
+function include(node: any[], path: string, value: any) {
+    const outputList: any[] = [];
+    for (const keyTarget in node) {
+        const current = node[keyTarget];
+        if (getSubValue(current, path) === value) {
+            outputList.push(current);
+        }
+    }
+    return outputList;
+}
+
+function exclude(node: any[], path: string, value: any) {
+    const outputList: any[] = [];
+    for (const keyTarget in node) {
+        const current = node[keyTarget];
+        if (getSubValue(current, path) !== value) {
+            outputList.push(current);
+        }
+    }
+    return outputList;
 }
 
 function toArray(node: any, keyTargetName: string, valueTargetName: string): any[] {

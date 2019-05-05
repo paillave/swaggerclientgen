@@ -77,24 +77,23 @@ export interface IModelWithReferences<T> {
     model: T;
     references: IReferences;
 }
-
 export const RestOperators = {
     Entities: {
-        Get: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchData<IModelWithReferences<Models.IEntityModel>, {}>(state$, RestApisDictionary.Entities.Get),
-        Delete: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchNoData<{}>(state$, RestApisDictionary.Entities.Delete),
-        GetAll: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchData<IModelWithReferences<[Models.IEntityModel]>, {}>(state$, RestApisDictionary.Entities.GetAll),
-        Save: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchData<IModelWithReferences<Models.IEntityModel>, {}>(state$, RestApisDictionary.Entities.Save),
+        Get: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchData<IModelWithReferences<Models.IEntityModel>, { id?: number,  }, {}>(state$, RestApisDictionary.Entities.Get),
+        Delete: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchNoData<{ id?: number,  }, {}>(state$, RestApisDictionary.Entities.Delete),
+        GetAll: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchData<IModelWithReferences<[Models.IEntityModel]>, {  }, {}>(state$, RestApisDictionary.Entities.GetAll),
+        Save: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchData<IModelWithReferences<Models.IEntityModel>, {  }, Models.IEntityModel>(state$, RestApisDictionary.Entities.Save),
     },
     ProfileAccount: {
-        Current: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchData<Models.IProfileModel, {}>(state$, RestApisDictionary.ProfileAccount.Current),
+        Current: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchData<Models.IProfileModel, {  }, {}>(state$, RestApisDictionary.ProfileAccount.Current),
     },
     SampleData: {
-        WeatherForecasts: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchData<[Models.IWeatherForecast], {}>(state$, RestApisDictionary.SampleData.WeatherForecasts),
+        WeatherForecasts: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchData<[Models.IWeatherForecast], { startDateIndex: number,  }, {}>(state$, RestApisDictionary.SampleData.WeatherForecasts),
     },
     Securities: {
-        Get: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchData<IModelWithReferences<Models.ISecurityModel>, {}>(state$, RestApisDictionary.Securities.Get),
-        Delete: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchNoData<{}>(state$, RestApisDictionary.Securities.Delete),
-        GetAll: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchData<IModelWithReferences<[Models.ISecurityModel]>, {}>(state$, RestApisDictionary.Securities.GetAll),
-        Save: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchData<IModelWithReferences<Models.ISecurityModel>, {}>(state$, RestApisDictionary.Securities.Save),
+        Get: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchData<IModelWithReferences<Models.ISecurityModel>, { id?: number,  }, {}>(state$, RestApisDictionary.Securities.Get),
+        Delete: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchNoData<{ id?: number,  }, {}>(state$, RestApisDictionary.Securities.Delete),
+        GetAll: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchData<IModelWithReferences<[Models.ISecurityModel]>, {  }, {}>(state$, RestApisDictionary.Securities.GetAll),
+        Save: (state$: dataAccess.IUserStateObservable) => dataAccess.fetchData<IModelWithReferences<Models.ISecurityModel>, {  }, Models.ISecurityModel>(state$, RestApisDictionary.Securities.Save),
     },
 };
