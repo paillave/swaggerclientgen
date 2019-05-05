@@ -1,11 +1,11 @@
 {
   "name": "json-template-text",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Generate files from json files using templates",
-  "main": "bin/index.js",
+  "main": "bin/cli.js",
   "preferGlobal": true,
   "bin": {
-    "json-template-text": "bin/index.js"
+    "json-template-text": "bin/cli.js"
   },
   "scripts": {
     "clean": "rimraf bin",
@@ -25,7 +25,7 @@
     "url": "https://github.com/paillave/swaggerclientgen.git"
   },
   "files": [
-    "bin/index.js"
+    "bin/cli.js"
   ],
   "devDependencies": {
     "@types/node": "^11.13.8",

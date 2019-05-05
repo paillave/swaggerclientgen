@@ -115,4 +115,4 @@ function toArray(node, keyTargetName, valueTargetName) {
     }
     return outputList;
 }
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=cli.js.map

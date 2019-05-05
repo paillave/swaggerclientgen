@@ -19,6 +19,6 @@
 	// 	"files"
 	// ],
 	"include": [
-		"src/index.ts"
+		"src/cli.ts"
 	]
 }
