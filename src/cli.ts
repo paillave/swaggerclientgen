@@ -23,7 +23,7 @@ interface IArgs {
 
 program
     .usage("[options]")
-    .version("1.0.4")
+    .version("1.0.5")
     .description("Generate any text file from a web or local json file using a template.")
     .option("-c, --config <file>", "configuration file path")
     .option("-t, --template <file>", "template file path")
@@ -89,7 +89,8 @@ async function execute(config: IConfig) {
     const env = nunjucks.configure({ autoescape: false, trimBlocks: true });
     env.addFilter("toarray", toArray);
     env.addFilter("selectmany", selectMany);
-    env.addFilter("groupby2", groupBy)
+    env.addFilter("groupby2", groupBy);
+    env.addFilter("regexreplace", regexReplace);
     for (let templateFile in config.transformations) {
         const apisContent = nunjucks.render(templateFile as string, swaggerContent);
         fs.writeFileSync(config.transformations[templateFile], apisContent);
@@ -145,4 +146,11 @@ function toArray(node: any, keyTargetName: string, valueTargetName: string): any
         });
     }
     return outputList;
+}
+
+function regexReplace(input: string, expr: string, replacement: string): string {
+    if (!input) {
+        return input;
+    }
+    return input.replace(new RegExp(expr, "g"), replacement);
 }
