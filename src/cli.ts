@@ -1,8 +1,11 @@
+#!/usr/bin/env node
+
 import fetch from "node-fetch";
-import { argv } from "yargs";
+import * as program from "commander";
 import * as nunjucks from "nunjucks";
 import * as fs from "fs";
 import { Agent } from "https";
+//import * as pack from "../package.json";
 
 interface IConfig {
     inputUri: string;
@@ -11,32 +14,55 @@ interface IConfig {
     };
 }
 
-console.info("Generation...");
-execute(getConfig())
-    .then(executionSuccessful)
-    .catch(executionFailed);
+interface IArgs {
+    config?: string;
+    input?: string;
+    template?: string;
+    output?: string;
+}
+
+program
+    .usage("[options]")
+    .description("Generate any text file from a web or local json file using a template.")
+    .option("-c, --config <file>", "configuration file path")
+    .option("-t, --template <file>", "template file path")
+    .option("-o, --output <file>", "output file path")
+    .option("-i, --input <file>", "input json file path or url")
+    .parse(process.argv);
+
+const commandLineArguments = program as unknown as IArgs;
+
+if (!commandLineArguments.config && !(commandLineArguments.input && commandLineArguments.output && commandLineArguments.template)) {
+    program.outputHelp();
+}
+else {
+    console.info("Generation...");
+
+    execute(getConfig(commandLineArguments))
+        .then(executionSuccessful)
+        .catch(executionFailed);
+}
 
 function executionSuccessful() {
     console.info("Generation done");
 }
 
 function executionFailed(reason: any) {
-    console.info(reason);
+    console.error(reason);
 }
 
-function getConfig(): IConfig {
-    if (argv.config) {
-        return JSON.parse(fs.readFileSync(argv.config as string).toString()) as IConfig;
+function getConfig(args: IArgs): IConfig {
+    if (args.config) {
+        return JSON.parse(fs.readFileSync(args.config as string).toString()) as IConfig;
     }
     else {
         return {
-            inputUri: argv.source as string,
+            inputUri: args.input as string,
             transformations: {
-                [argv.templateFile as string]: argv.targetFile as string
+                [args.template as string]: args.output as string
             }
         };
     }
-
 }
 
 async function readFileContent<T>(uri: string): Promise<T> {

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -9,29 +10,43 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_fetch_1 = require("node-fetch");
-const yargs_1 = require("yargs");
+const program = require("commander");
 const nunjucks = require("nunjucks");
 const fs = require("fs");
 const https_1 = require("https");
-console.info("Generation...");
-execute(getConfig())
-    .then(executionSuccessful)
-    .catch(executionFailed);
+program
+    .usage("[options]")
+    .description("Generate any text file from a web or local json file using a template.")
+    .option("-c, --config <file>", "configuration file path")
+    .option("-t, --template <file>", "template file path")
+    .option("-o, --output <file>", "output file path")
+    .option("-i, --input <file>", "input json file path or url")
+    .parse(process.argv);
+const commandLineArguments = program;
+if (!commandLineArguments.config && !(commandLineArguments.input && commandLineArguments.output && commandLineArguments.template)) {
+    program.outputHelp();
+}
+else {
+    console.info("Generation...");
+    execute(getConfig(commandLineArguments))
+        .then(executionSuccessful)
+        .catch(executionFailed);
+}
 function executionSuccessful() {
     console.info("Generation done");
 }
 function executionFailed(reason) {
-    console.info(reason);
+    console.error(reason);
 }
-function getConfig() {
-    if (yargs_1.argv.config) {
-        return JSON.parse(fs.readFileSync(yargs_1.argv.config).toString());
+function getConfig(args) {
+    if (args.config) {
+        return JSON.parse(fs.readFileSync(args.config).toString());
     }
     else {
         return {
-            inputUri: yargs_1.argv.source,
+            inputUri: args.input,
             transformations: {
-                [yargs_1.argv.templateFile]: yargs_1.argv.targetFile
+                [args.template]: args.output
             }
         };
     }
