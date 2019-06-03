@@ -93,6 +93,7 @@ async function execute(config: IConfig) {
     env.addFilter("regexreplace", regexReplace);
     env.addFilter("include", include);
     env.addFilter("exclude", exclude);
+    env.addFilter("camelize", camelize);
     for (let templateFile in config.transformations) {
         const apisContent = nunjucks.render(templateFile as string, swaggerContent);
         fs.writeFileSync(config.transformations[templateFile], apisContent);
@@ -177,4 +178,13 @@ function regexReplace(input: string, expr: string, replacement: string): string 
         return input;
     }
     return input.replace(new RegExp(expr, "g"), replacement);
+}
+
+function camelize(input: string): string {
+    if (!input) {
+        return input;
+    }
+    return input.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+        return index === 0 ? word.toLowerCase() : word.toUpperCase();
+    }).replace(/\s+/g, '');
 }
