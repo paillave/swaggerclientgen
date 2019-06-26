@@ -1,6 +1,6 @@
 {
   "name": "json-template-text",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "Generate files from json files using templates",
   "main": "bin/cli.js",
   "preferGlobal": true,

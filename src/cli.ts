@@ -85,7 +85,7 @@ async function readFileContent<T>(uri: string): Promise<T> {
 }
 
 async function execute(config: IConfig) {
-    const swaggerContent = await (readFileContent(config.inputUri));
+    const swaggerContent = await (readFileContent<object>(config.inputUri));
     const env = nunjucks.configure({ autoescape: false, trimBlocks: true });
     env.addFilter("toarray", toArray);
     env.addFilter("selectmany", selectMany);
@@ -94,6 +94,7 @@ async function execute(config: IConfig) {
     env.addFilter("include", include);
     env.addFilter("exclude", exclude);
     env.addFilter("camelize", camelize);
+    env.addFilter("titleCase", titleCase);
     for (let templateFile in config.transformations) {
         const apisContent = nunjucks.render(templateFile as string, swaggerContent);
         fs.writeFileSync(config.transformations[templateFile], apisContent);
@@ -186,5 +187,14 @@ function camelize(input: string): string {
     }
     return input.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
         return index === 0 ? word.toLowerCase() : word.toUpperCase();
+    }).replace(/\s+/g, '');
+}
+
+function titleCase(input: string): string {
+    if (!input) {
+        return input;
+    }
+    return input.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word) {
+        return word.toUpperCase();
     }).replace(/\s+/g, '');
 }
